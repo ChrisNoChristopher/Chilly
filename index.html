@@ -2,27 +2,19 @@
 <html>
 <head>
     <style>
-        body {
+        body, html {
+            height: 100%;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
+            background-color: black;
         }
-        .container {
-            text-align: center;
-        }
-        a {
-            padding: 10px 20px;
-            background-color: #4285F4;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-        a:hover {
-            background-color: #357ae8;
+        iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
         }
     </style>
     <script>
@@ -32,13 +24,24 @@
                 event.preventDefault();
             }
         });
+
+        document.addEventListener('click', function(event) {
+            const iframe = document.querySelector('iframe');
+            const rect = iframe.getBoundingClientRect();
+            const inIframe = (
+                event.clientX >= rect.left &&
+                event.clientX <= rect.right &&
+                event.clientY >= rect.top &&
+                event.clientY <= rect.bottom
+            );
+
+            if (!inIframe) {
+                event.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
-    <div class="container">
-        <h1>View the Presentation</h1>
-        <a href="https://docs.google.com/presentation/d/e/2PACX-1vTR02giHnOzA1MFWnxpVyOgDR_2D8Bk6KstKx4OLSG_zTkSaVRlIq9OHYHV_Cx5Lep0QeRIHTd-vSmz/pub?start=false&loop=false" target="_blank">Open Presentation</a>
-    </div>
+    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTR02giHnOzA1MFWnxpVyOgDR_2D8Bk6KstKx4OLSG_zTkSaVRlIq9OHYHV_Cx5Lep0QeRIHTd-vSmz/embed?start=false&loop=false&delayms=30000" allowfullscreen></iframe>
 </body>
 </html>
-
